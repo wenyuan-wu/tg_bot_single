@@ -16,7 +16,7 @@ def get_response_openai(input_text):
                  "korrigierten und verbesserten Version des Eingabetextes in Schweizer Hochdeutsch. Verwenden Sie für " \
                  "Pronomen der zweiten Person immer die vertraute Form. Geben Sie außerdem 2 alternative Versionen " \
                  "der Übersetzung und Erklärungen an."
-    model = "gpt-3.5-turbo-0613"
+    model = "gpt-3.5-turbo-16k-0613"
     messages = [
         {"role": "system", "content": f"{sys_prompt}"},
         {"role": "user", "content": f"{input_text}"}
