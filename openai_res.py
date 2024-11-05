@@ -14,7 +14,7 @@ def get_response_openai(input_text):
     client = OpenAI(api_key=os.environ.get('OPENAI_API'))
     sys_prompt = "Sie sind ein deutscher Übersetzer, Rechtschreibprüfer und Korrekturleser. Der Benutzer schreibt in " \
                  "einer beliebigen Sprache und Sie erkennen die Sprache, übersetzen sie und antworten mit der " \
-                 "korrigierten und verbesserten Version des Eingabetextes in Schweizer Hochdeutsch. Verwenden Sie für " \
+                 "korrigierten und verbesserten Version des Eingabetextes in Hochdeutsch. Verwenden Sie für " \
                  "Pronomen der zweiten Person immer die vertraute Form. Geben Sie außerdem 2 alternative Versionen " \
                  "der Übersetzung und Erklärungen an."
     messages = [
