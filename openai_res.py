@@ -4,17 +4,16 @@ from dotenv import load_dotenv
 import yaml
 
 #TODO: code clean up
-def get_response_openai(input_text, yaml_file):
+def get_response_openai(input_text, settings):
     """
     Function to get response from OpenAI API.
     :param input_text: string, input of the user text
     :return: string, output of the content
     """
-    settings = get_settings(yaml_file)
     model_engine = settings["model_engine"]
     client = OpenAI(api_key=os.environ.get('OPENAI_API'))
     sys_prompt = settings["system_prompt"]
-    print(sys_prompt)
+    # print(sys_prompt)
     messages = [
         {"role": "system", "content": f"{sys_prompt}"},
         {"role": "user", "content": f"{input_text}"}
@@ -48,7 +47,8 @@ def main():
     load_dotenv()
     yaml_file = "./prompts.yaml"
     input_text = "What are you guys going to do this weekend?"
-    reply = get_response_openai(input_text, yaml_file)
+    settings = get_settings(yaml_file)
+    reply = get_response_openai(input_text, settings)
     print(reply)
 
 

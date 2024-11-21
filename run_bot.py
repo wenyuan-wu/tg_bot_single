@@ -4,9 +4,8 @@ from openai_res import get_response_openai, get_response_openai_test, get_settin
 from dotenv import load_dotenv
 
 
-def run_tg_bot(bot_token, yaml_file):
+def run_tg_bot(bot_token, settings):
     bot = telebot.TeleBot(bot_token)
-    settings = get_settings(yaml_file)
     welcome_msg = settings["welcome_message"]
     help_msg = settings["help_message"]
 
@@ -20,7 +19,7 @@ def run_tg_bot(bot_token, yaml_file):
 
     @bot.message_handler(func=lambda message: True)
     def echo_all(message):
-        reply = get_response_openai(message.text)
+        reply = get_response_openai(message.text, settings)
         bot.reply_to(message, reply, parse_mode="Markdown")
 
     bot.infinity_polling()
@@ -29,7 +28,10 @@ def run_tg_bot(bot_token, yaml_file):
 def main():
     load_dotenv()
     bot_token = os.environ.get('BOT_TOKEN')
-    run_tg_bot(bot_token)
+    yaml_file = "./prompts.yaml"
+    settings = get_settings(yaml_file)
+    # print(os.getpid())
+    run_tg_bot(bot_token, settings)
 
 
 if __name__ == '__main__':
