@@ -1,22 +1,22 @@
 import os
 import telebot
-from openai_res import get_response_openai, get_response_openai_test
+from openai_res import get_response_openai, get_response_openai_test, get_settings
 from dotenv import load_dotenv
 
 
-def run_tg_bot(bot_token):
+def run_tg_bot(bot_token, yaml_file):
     bot = telebot.TeleBot(bot_token)
+    settings = get_settings(yaml_file)
+    welcome_msg = settings["welcome_message"]
+    help_msg = settings["help_message"]
 
     @bot.message_handler(commands=['start'])
     def send_welcome(message):
-        bot.reply_to(message, "Servus, wie geht's dir? Schreib mir in irgendeiner Sprache und ich helfe dir mit der "
-                              "Übersetzung ins Deutsche!")
+        bot.reply_to(message, welcome_msg)
 
     @bot.message_handler(commands=['help'])
     def send_welcome(message):
-        bot.reply_to(message, "Wenn das Ergebnis manchmal nicht zufriedenstellend ist, versuche es einfach ein "
-                              "andermal. Die Flexibilität des Modells ist hoch, jede Ausgabe sollte unterschiedlich "
-                              "sein, auch wenn die Eingabe die gleiche ist.")
+        bot.reply_to(message, help_msg)
 
     @bot.message_handler(func=lambda message: True)
     def echo_all(message):
