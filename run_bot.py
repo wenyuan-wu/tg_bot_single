@@ -20,7 +20,10 @@ def run_tg_bot(bot_token, settings):
     @bot.message_handler(func=lambda message: True)
     def echo_all(message):
         reply = get_response_openai(message.text, settings)
-        bot.reply_to(message, reply, parse_mode="Markdown")
+        max_length = 4096
+        # Split the reply if it's too long
+        for i in range(0, len(reply), max_length):
+            bot.reply_to(message, reply[i:i + max_length], parse_mode="Markdown")
 
     bot.infinity_polling()
 
