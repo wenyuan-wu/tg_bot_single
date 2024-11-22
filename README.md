@@ -2,7 +2,7 @@
 
 A telegram bot to handle conversation for single turn with OpenAI API. 
 This is mostly purpose-built, e.g., a German Helper.
-Based on this [repo](https://github.com/wenyuan-wu/chatGPT_tg_bot_demo)
+Based on this [repo](https://github.com/wenyuan-wu/tg_bot_multi)
 
 ## Setting up environment
 
